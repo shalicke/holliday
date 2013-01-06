@@ -4,10 +4,10 @@
 
 #### Requirements
 
-* Pandoc (http://johnmacfarlane.net/pandoc/)
+* [Pandoc](http://johnmacfarlane.net/pandoc/)
 * Bash
 * Optional: Knowledge of Markdown
-  * http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet
+  * [Markdown Cheatsheet](http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet)
 
 Here's what Holliday is all about. DOCumentation.
 
