@@ -2,12 +2,12 @@
 
 ## Welcome to Holliday!
 
-### Requirements
+#### Requirements
 
-#### Pandoc (http://johnmacfarlane.net/pandoc/)
-#### Bash
-#### Optional: Knowledge of Markdown
-###### http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet
+* Pandoc (http://johnmacfarlane.net/pandoc/)
+* Bash
+* Optional: Knowledge of Markdown
+  * http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet
 
 Here's what Holliday is all about. DOCumentation.
 
