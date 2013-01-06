@@ -31,11 +31,12 @@ function stop_holliday () {
   HISTFILE="$HOME/.bash_history"
   set -o history
 
-  CMDS="$(fc -l $_DOC_HISTORY_START)"
+  CMDS="$(fc -l $_DOC_HISTORY_START | awk '{for (i=2; i<=NF; i++) print $i}')"
 
   DATESTRING=$(date +'%s')
   export _DOC_FILENAME="$TMPDIR/holliday-${USER}-${DATESTRING}.txt"
   echo "$CMDS" >> "$TMPDIR/holliday-${USER}-${DATESTRING}.txt"
+  sed -i -e 's/^(\w)/^\t$1/' $_DOC_FILENAME
 
   doc_prompt
 }
@@ -55,6 +56,19 @@ function doc_prompt () {
   read _DOC_TO_EMAIL
   echo "Enter a title for your document: "
   read _DOC_TITLE
-  echo "Generating $DOC_OUTPUT_FORMAT document $_DOC_TITLE (from $_DOC_FILENAME, as $_DOC_INPUT_FORMAT) and sending to $_DOC_EMAIL." 
-  exec "$PWD/holliday.py $_DOC_OUTPUT_FORMAT $_DOC_TITLE $_DOC_FILENAME $_DOC_EMAIL"
+  doc_generate
   }
+
+function doc_generate() {
+  
+  echo "Generating $DOC_OUTPUT_FORMAT document $_DOC_TITLE (from $_DOC_FILENAME, as $_DOC_INPUT_FORMAT) and sending to $_DOC_EMAIL." 
+
+  PANDOC_FILE="${PWD}/${_DOC_TITLE}.${_DOC_OUTPUT_FORMAT}"
+  pandoc -f ${_DOC_INPUT_FORMAT} -o ${PANDOC_FILE}
+
+  if [[ $? == 0 ]]; then
+    echo "File generated: ${PANDOC_FILE}"
+  fi
+
+  mail -s "Your documentation: ${_DOC_TITLE}" < ${PANDOC_FILE}
+}
